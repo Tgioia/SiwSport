@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Elenco Squadre - Admin</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <h1>Elenco delle Squadre</h1>
+    </header>
+
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Anno di Fondazione</th>
+                    <th>Indirizzo Sede</th>
+                    <th>Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="squadra : ${squadre}">
+                    <td th:text="${squadra.nome}">Nome</td>
+                    <td th:text="${squadra.annoFondazione}">Logo:</td>
+                    <td>
+                        <a th:href="@{/squadra/{id}(id=${squadra.id})}">Dettagli</a>
+                        <a th:href="@{/admin/squadra/edit/{id}(id=${squadra.id})}">Modifica</a>
+                        <a th:href="@{/admin/squadra/delete/{id}(id=${squadra.id})}">Elimina</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/admin/formNewSquadra}">Aggiungi Nuova Squadra</a>
+    </main>
+</body>
+</html>

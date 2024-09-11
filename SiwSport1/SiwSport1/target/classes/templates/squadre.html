@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Elenco Squadre</title>
+</head>
+<body>
+    <h2>Elenco Squadre</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Nome Squadra</th>
+                <th>Anno Fondazione</th>
+                <th>Indirizzo</th>
+                <th>Presidente</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="squadra : ${squadre}">
+                <td th:text="${squadra.nome}">Nome Squadra</td>
+                <!-- Logo: <td th:text="${squadra.annoFondazione}">Anno Fondazione</td>-->
+                <td>
+                    <a th:href="@{/squadra/{id}(id=${squadra.id})}">Dettagli</a>
+                    <a th:href="@{/squadra/delete/{id}(id=${squadra.id})}">Elimina</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

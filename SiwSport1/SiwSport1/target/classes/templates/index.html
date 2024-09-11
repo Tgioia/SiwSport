@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage - Federazione Sportiva</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <h1>Federazione Sportiva</h1>
+        <nav>
+            <ul>
+                <li><a th:href="@{/squadre}">Squadre</a></li>
+                <li><a th:href="@{/giocatori}">Giocatori</a></li>
+                <li th:if="${#authentication.name != 'anonymousUser'}"><a th:href="@{/logout}">Logout</a></li>
+                <li th:unless="${#authentication.name != 'anonymousUser'}"><a th:href="@{/login}">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Benvenuto nella Federazione Sportiva</h2>
+            <p>Scopri le squadre, i giocatori e le ultime notizie del nostro campionato!</p>
+        </section>
+
+        <div>
+            <a th:href="@{/squadre}" class="button">Visualizza Squadre</a>
+        </div>
+        <div>
+            <a th:href="@{/giocatori}" class="button">Visualizza Giocatori</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 Federazione Sportiva</p>
+    </footer>
+</body>
+</html>
