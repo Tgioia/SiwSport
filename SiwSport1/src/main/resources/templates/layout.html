@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Federazione Sportiva</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <h1>Federazione Sportiva</h1>
+        <nav>
+            <ul>
+                <li><a th:href="@{/squadre}">Squadre</a></li>
+                <li><a th:href="@{/giocatori}">Giocatori</a></li>
+                <li><a th:href="@{/login}">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div th:insert="~{::main-content}"></div>
+
+    <footer>
+        <p>© 2024 Federazione Sportiva</p>
+    </footer>
+</body>
+</html>
