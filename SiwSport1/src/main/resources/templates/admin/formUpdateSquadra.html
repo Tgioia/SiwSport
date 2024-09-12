@@ -3,36 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Aggiorna Squadra</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <header>
-        <h1>Aggiorna Squadra</h1>
+        <a href="/"><img src="/images/logo.png" alt="Federazione Sportiva Logo" class="logo"></a>
+        <h1>Federazione Sportiva</h1>
+        <nav>
+            <ul>
+                <li th:if="${#authentication.name != 'anonymousUser'}"><a th:href="@{/logout}">Logout</a></li>
+                <li th:unless="${#authentication.name != 'anonymousUser'}"><a th:href="@{/login}">Login</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <main>
-        <form th:action="@{/admin/squadra/update}" th:object="${squadra}" method="post">
-			<input type="hidden" th:field="*{id}" />
-            <div>
-                <label for="nome">Nome Squadra:</label>
-                <input type="text" id="nome" th:field="*{nome}" required />
-            </div>
+    <h1>Aggiorna Squadra</h1>
+    <form th:action="@{/admin/squadra/update}" th:object="${squadra}" method="post">
+        <input type="hidden" th:field="*{id}" />
 
-            <div>
-                <label for="annoFondazione">Anno di Fondazione:</label>
-                <input type="number" id="annoFondazione" th:field="*{annoFondazione}" required />
-            </div>
+        <div>
+            <label for="nome">Nome Squadra:</label>
+            <input type="text" id="nome" th:field="*{nome}" required />
+        </div>
 
-            <div>
-                <label for="indirizzoSede">Indirizzo della Sede:</label>
-                <input type="text" id="indirizzoSede" th:field="*{indirizzoSede}" required />
-            </div>
+        <div>
+            <label for="annoFondazione">Anno di Fondazione:</label>
+            <input type="number" id="annoFondazione" th:field="*{annoFondazione}" required />
+        </div>
 
-            <button type="submit">Salva Modifiche</button>
-        </form>
+        <div>
+            <label for="indirizzoSede">Indirizzo della Sede:</label>
+            <input type="text" id="indirizzoSede" th:field="*{indirizzoSede}" required />
+        </div>
 
-        <!-- Link per tornare alla pagina di gestione delle squadre -->
-        <a th:href="@{/admin/indexSquadra}">Torna all'indice delle squadre</a>
-    </main>
+        <div>
+            <label for="presidente.nome">Nome del presidente:</label>
+            <input type="text" id="presidente.nome" th:field="*{presidente.nome}" required />
+        </div>
+
+        <div>
+            <label for="presidente.cognome">Cognome del presidente:</label>
+            <input type="text" id="presidente.cognome" th:field="*{presidente.cognome}" required />
+        </div>
+
+        <button type="submit">Salva Modifiche</button>
+    </form>
+
+    <a th:href="@{/admin/indexSquadra}">Torna all'indice delle squadre</a>
 </body>
 </html>

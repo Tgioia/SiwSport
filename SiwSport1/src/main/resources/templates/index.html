@@ -8,13 +8,16 @@
 </head>
 <body>
     <header>
+        <img src="/images/logo.png" alt="Federazione Sportiva Logo" class="logo">
         <h1>Federazione Sportiva</h1>
         <nav>
             <ul>
-                <li><a th:href="@{/squadre}">Squadre</a></li>
-                <li><a th:href="@{/giocatori}">Giocatori</a></li>
-                <li th:if="${#authentication.name != 'anonymousUser'}"><a th:href="@{/logout}">Logout</a></li>
-                <li th:unless="${#authentication.name != 'anonymousUser'}"><a th:href="@{/login}">Login</a></li>
+                <li th:if="${#authentication.name != 'anonymousUser'}">
+                    <a th:href="@{/logout}">Logout</a>
+                </li>
+                <li th:unless="${#authentication.name != 'anonymousUser'}">
+                    <a th:href="@{/login}">Login</a>
+                </li>
             </ul>
         </nav>
     </header>
@@ -25,10 +28,16 @@
             <p>Scopri le squadre, i giocatori e le ultime notizie del nostro campionato!</p>
         </section>
 
+        <div>
+            <a th:href="@{/squadre}" class="button">Visualizza Squadre</a>
+        </div>
+        <div>
+            <a th:href="@{/giocatori}" class="button">Visualizza Giocatori</a>
+        </div>
     </main>
 
     <footer>
-        <p>© 2024 Federazione Sportiva</p>
+        <p> 2024 Federazione Sportiva</p>
     </footer>
 </body>
 </html>

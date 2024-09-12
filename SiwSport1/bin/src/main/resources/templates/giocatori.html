@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Elenco Giocatori</title>
+</head>
+<body>
+    <h2>Elenco Giocatori</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Ruolo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="giocatore : ${giocatori}">
+                <td th:text="${giocatore.nome}">Nome</td>
+                <td th:text="${giocatore.cognome}">Cognome</td>
+                <td th:text="${giocatore.ruolo}">Ruolo</td>
+                <td>
+                    <a th:href="@{'/giocatore' + '/' +${giocatore.id}}">Dettagli</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

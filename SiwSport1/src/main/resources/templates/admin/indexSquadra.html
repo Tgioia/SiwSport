@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Elenco Squadre - Admin</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <header>
+        <a href="/"><img src="/images/logo.png" alt="Federazione Sportiva Logo" class="logo"></a>
         <h1>Elenco delle Squadre</h1>
+        <nav>
+            <ul>
+                <li th:if="${#authentication.name != 'anonymousUser'}"><a th:href="@{/logout}">Logout</a></li>
+                <li th:unless="${#authentication.name != 'anonymousUser'}"><a th:href="@{/login}">Login</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
@@ -23,8 +30,8 @@
             <tbody>
                 <tr th:each="squadra : ${squadre}">
                     <td th:text="${squadra.nome}">Nome</td>
-                    <td th:text="${squadra.annoFondazione}">Logo:</td>
-					<td></td>
+                    <td th:text="${squadra.annoFondazione}">Anno di Fondazione</td>
+                    <td></td>
                     <td>
                         <a th:href="@{/squadra/{id}(id=${squadra.id})}">Dettagli</a>
                         <a th:href="@{/admin/formUpdateSquadra/{id}(id=${squadra.id})}">Modifica</a>

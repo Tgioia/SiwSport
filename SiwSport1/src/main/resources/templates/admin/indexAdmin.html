@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard Amministratore</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <header>
-        <h1>Dashboard Amministratore</h1>
+        <a href="/"><img src="/images/logo.png" alt="Federazione Sportiva Logo" class="logo"></a>
+        <h1>Federazione Sportiva - Admin Dashboard</h1>
+        <nav>
+            <ul>
+                <li th:if="${#authentication.name != 'anonymousUser'}"><a th:href="@{/logout}">Logout</a></li>
+                <li th:unless="${#authentication.name != 'anonymousUser'}"><a th:href="@{/login}">Login</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
@@ -27,16 +34,6 @@
             </ul>
         </section>
 
-        <section>
-            <h2>Gestione Altre Funzionalità</h2>
-            <ul>
-                <li><a th:href="@{/admin/manageOther}">Gestisci Altre Funzionalità</a></li>
-            </ul>
-        </section>
-
-        <section>
-            <a th:href="@{/logout}">Logout</a>
-        </section>
     </main>
 
     <footer>

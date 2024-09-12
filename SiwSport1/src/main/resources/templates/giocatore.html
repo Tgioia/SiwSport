@@ -1,21 +1,43 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
+
 <head>
     <title>Dettagli Giocatore</title>
-	<link rel="stylesheet" href="/css/cuoco.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
 </head>
-<body>
-    <h2>Dettagli del Giocatore</h2>
 
+<body>
+    <header>
+        <a href="/"><img src="/images/logo.png" alt="Federazione Sportiva Logo" class="logo"></a>
+        <h1>Federazione Sportiva</h1>
+        <nav>
+            <ul>
+                <li th:if="${#authentication.name != 'anonymousUser'}">
+                    <a th:href="@{/logout}">Logout</a>
+                </li>
+                <li th:unless="${#authentication.name != 'anonymousUser'}">
+                    <a th:href="@{/login}">Login</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <h2>Dettagli del Giocatore</h2>
     <div>
         <p><strong>Nome:</strong> <span th:text="${giocatore.nome}">Nome Giocatore</span></p>
         <p><strong>Cognome:</strong> <span th:text="${giocatore.cognome}">Cognome Giocatore</span></p>
         <p><strong>Data di Nascita:</strong> <span th:text="${giocatore.dataNascita}">01/01/1990</span></p>
         <p><strong>Luogo di Nascita:</strong> <span th:text="${giocatore.luogoNascita}">Roma</span></p>
         <p><strong>Ruolo:</strong> <span th:text="${giocatore.ruolo}">Attaccante</span></p>
-        <p><strong>Squadra:</strong> <span th:text="${giocatore.squadra.nome}">Squadra A</span></p>
+		<p><strong>Squadra:</strong> 
+		    <a th:href="@{'/squadra/' + ${giocatore.squadra.id}}">
+		        <span th:text="${giocatore.squadra.nome}">Squadra A</span>
+		    </a>
+		</p>
+
     </div>
 
     <a th:href="@{/giocatori}">Torna all'elenco giocatori</a>
 </body>
+
 </html>

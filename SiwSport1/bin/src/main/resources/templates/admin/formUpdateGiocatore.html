@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Aggiorna Giocatore</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <h1>Aggiorna Dati Giocatore</h1>
+    </header>
+
+    <main>
+        <form th:action="@{/admin/giocatore/update}" th:object="${giocatore}" method="post">
+			<input type="hidden" th:field="*{id}" />
+            <div>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" th:field="*{nome}" required />
+            </div>
+
+            <div>
+                <label for="cognome">Cognome:</label>
+                <input type="text" id="cognome" th:field="*{cognome}" required />
+            </div>
+
+            <div>
+                <label for="dataNascita">Data di Nascita:</label>
+                <input type="date" id="dataNascita" th:field="*{dataNascita}" required />
+            </div>
+
+            <div>
+                <label for="luogoNascita">Luogo di Nascita:</label>
+                <input type="text" id="luogoNascita" th:field="*{luogoNascita}" required />
+            </div>
+
+            <div>
+                <label for="ruolo">Ruolo:</label>
+                <input type="text" id="ruolo" th:field="*{ruolo}" required />
+            </div>
+
+			<label for="squadra">Squadra:</label>
+			    <select th:field="*{squadra.id}">
+			        <option th:each="squadra : ${squadre}" th:value="${squadra.id}" th:text="${squadra.nome}">Squadra</option>
+			    </select>
+
+            <button type="submit">Salva Modifiche</button>
+        </form>
+
+        <a th:href="@{/admin/indexGiocatori}">Torna all'indice dei giocatori</a>
+    </main>
+</body>
+</html>

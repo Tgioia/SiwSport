@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Amministratore</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <h1>Dashboard Amministratore</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Gestione Squadre</h2>
+            <ul>
+                <li><a th:href="@{/admin/formNewSquadra}">Aggiungi Nuova Squadra</a></li>
+                <li><a th:href="@{/admin/indexSquadra}">Visualizza e Gestisci Squadre</a></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Gestione Giocatori</h2>
+            <ul>
+                <li><a th:href="@{/admin/formNewGiocatore}">Aggiungi Nuovo Giocatore</a></li>
+                <li><a th:href="@{/admin/indexGiocatori}">Visualizza e Gestisci Giocatori</a></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Gestione Altre Funzionalità</h2>
+            <ul>
+                <li><a th:href="@{/admin/manageOther}">Gestisci Altre Funzionalità</a></li>
+            </ul>
+        </section>
+
+        <section>
+            <a th:href="@{/logout}">Logout</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Federazione Sportiva</p>
+    </footer>
+</body>
+</html>

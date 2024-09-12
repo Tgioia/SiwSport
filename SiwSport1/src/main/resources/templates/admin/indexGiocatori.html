@@ -3,11 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Elenco Giocatori</title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <header>
+        <a href="/"><img src="/images/logo.png" alt="Federazione Sportiva Logo" class="logo"></a>
         <h1>Elenco Giocatori</h1>
+        <nav>
+            <ul>
+                <li th:if="${#authentication.name != 'anonymousUser'}"><a th:href="@{/logout}">Logout</a></li>
+                <li th:unless="${#authentication.name != 'anonymousUser'}"><a th:href="@{/login}">Login</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
@@ -17,7 +24,7 @@
                     <th>Nome</th>
                     <th>Cognome</th>
                     <th>Ruolo</th>
-                    <th>Data di Nascita</th>
+                    <th>Squadra</th>
                     <th>Azioni</th>
                 </tr>
             </thead>
@@ -26,7 +33,7 @@
                     <td th:text="${giocatore.nome}">Nome</td>
                     <td th:text="${giocatore.cognome}">Cognome</td>
                     <td th:text="${giocatore.ruolo}">Ruolo</td>
-                    <td th:text="${giocatore.dataNascita}">Data di Nascita</td>
+                    <td th:text="${giocatore.squadra.nome}">Squada</td>
 
                     <td>
                         <a th:href="@{/admin/formUpdateGiocatore/{id}(id=${giocatore.id})}">Modifica</a>
