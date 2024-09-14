@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.Valid;
 
@@ -13,15 +14,30 @@ public class Credentials {
 
 	public static final String DEFAULT_ROLE = "DEFAULT";
 	public static final String ADMIN_ROLE = "ADMIN";
+	public static final String PRES_ROLE = "PRES";
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 	private String username;
 	private String password;
-	private String role;
+	private String role = DEFAULT_ROLE;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	
+    @OneToOne(optional = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "presidente_id")
+    private Presidente presidente;
+
+
+	public Presidente getPresidente() {
+		return presidente;
+	}
+
+	public void setPresidente(Presidente presidente) {
+		this.presidente = presidente;
+	}
+
+	@OneToOne(optional = true, cascade = CascadeType.ALL)
 	private User user;
 	
 	public String getUsername() {

@@ -52,6 +52,15 @@
                 <option th:each="squadra : ${squadre}" th:value="${squadra.id}" th:text="${squadra.nome}">Squadra</option>
             </select>
         </div>
+		<div>
+		    <label for="inizioTesseramento">Inizio tessermento:</label>
+		    <input type="date" id="inizioTesseramento" th:field="*{inizioTesseramento}" required />
+		</div>
+		<div>
+		     <label for="fineTesseramento">Fine tesseramento:</label>
+		     <input type="date" id="fineTesseramento" th:field="*{fineTesseramento}" required />
+		</div>
+
 
         <button type="submit">Salva Modifiche</button>
     </form>

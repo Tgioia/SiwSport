@@ -19,6 +19,7 @@ import it.uniroma3.siw.model.Squadra;
 import it.uniroma3.siw.repository.PresidenteRepository;
 import it.uniroma3.siw.repository.SquadraRepository;
 import it.uniroma3.siw.service.CredentialsService;
+import it.uniroma3.siw.service.PresidenteService;
 import jakarta.validation.Valid;
 
 @Controller
@@ -30,12 +31,15 @@ public class SquadraController {
     private PresidenteRepository presidenteRepository;
 	@Autowired
 	private CredentialsService credentialsService;
+	@Autowired
+	private PresidenteService presidenteService;
 
 	
     // Mostra il form per creare una nuova squadra
     @GetMapping(value="/admin/formNewSquadra")
     public String formNewSquadra(Model model) {
         model.addAttribute("squadra", new Squadra());
+        model.addAttribute("presidenti", presidenteService.findAll());
         return "admin/formNewSquadra.html";
     }
 
@@ -44,6 +48,7 @@ public class SquadraController {
     public String formUpdateSquadra(@PathVariable("id") Long id, Model model) {
     	Squadra squadra = squadraRepository.findById(id).get();
         model.addAttribute("squadra", squadra);
+        model.addAttribute("presidenti", presidenteService.findAll());
         return "admin/formUpdateSquadra.html";
     }
 
@@ -54,17 +59,14 @@ public class SquadraController {
         return "admin/indexSquadra.html";
     }
 
- // Aggiungi una nuova squadra (solo per admin)
     @PostMapping("/admin/squadra")
-    public String newSquadra(@ModelAttribute("squadra") Squadra squadra, Model model) {
-        if (!squadraRepository.existsByNomeAndAnnoFondazione(squadra.getNome(), squadra.getAnnoFondazione())) {
-        	Presidente presidente = squadra.getPresidente();
-        	this.presidenteRepository.save(presidente);
-            this.squadraRepository.save(squadra); 
-            model.addAttribute("squadra", squadra);
+    public String newSquadra(@Valid @ModelAttribute("squadra") Squadra squadra, 
+                             BindingResult bindingResult, Model model) {
+        if (!bindingResult.hasErrors()) {
+            this.squadraRepository.save(squadra);  
             return "redirect:/admin/indexSquadra";
         } else {
-            model.addAttribute("messaggioErrore", "Questa squadra esiste già");
+            model.addAttribute("presidenti", presidenteService.findAll());
             return "admin/formNewSquadra.html";
         }
     }

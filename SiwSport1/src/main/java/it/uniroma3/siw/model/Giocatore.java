@@ -27,6 +27,28 @@ public class Giocatore {
 
     @ManyToOne
     private Squadra squadra;
+    
+    private LocalDate inizioTesseramento;
+    
+    private LocalDate fineTesseramento;
+    
+    public LocalDate getInizioTesseramento() {
+		return inizioTesseramento;
+	}
+
+	public void setInizioTesseramento(LocalDate inizioTesseramento) {
+		this.inizioTesseramento = inizioTesseramento;
+	}
+
+	public LocalDate getFineTesseramento() {
+		return fineTesseramento;
+	}
+
+	public void setFineTesseramento(LocalDate termineTesseramento) {
+		this.fineTesseramento = fineTesseramento;
+	}
+
+	
 
     @OneToOne
     @JoinColumn(name = "image_id", nullable = true)

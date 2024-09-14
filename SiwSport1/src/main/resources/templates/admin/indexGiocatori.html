@@ -36,6 +36,7 @@
                     <td th:text="${giocatore.squadra.nome}">Squada</td>
 
                     <td>
+						<a th:href="@{/giocatore/{id}(id=${giocatore.id})}">Dettagli</a>
                         <a th:href="@{/admin/formUpdateGiocatore/{id}(id=${giocatore.id})}">Modifica</a>
                         <a th:href="@{/admin/giocatore/delete/{id}(id=${giocatore.id})}">Elimina</a>
                     </td>

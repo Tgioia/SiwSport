@@ -34,15 +34,16 @@
             <input type="text" id="indirizzoSede" th:field="*{indirizzoSede}" required />
         </div>
 
-        <div>
-            <label for="presidente.nome">Nome del presidente:</label>
-            <input type="text" id="presidente.nome" th:field="*{presidente.nome}" required />
-        </div>
+		<div>
+		    <label for="presidente">Seleziona Presidente:</label>
+		    <select id="presidente" th:field="*{presidente.id}">
+		        <option th:each="presidente : ${presidenti}" 
+		                th:value="${presidente.id}" 
+		                th:text="${presidente.nome} + ' ' + ${presidente.cognome}">
+		        </option>
+		    </select>
+		</div>
 
-        <div>
-            <label for="presidente.cognome">Cognome del presidente:</label>
-            <input type="text" id="presidente.cognome" th:field="*{presidente.cognome}" required />
-        </div>
 
         <button type="submit">Aggiungi Squadra</button>
     </form>

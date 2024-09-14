@@ -23,7 +23,6 @@
                 <tr>
                     <th>Nome</th>
                     <th>Anno di Fondazione</th>
-                    <th>Stemma</th>
                     <th>Azioni</th>
                 </tr>
             </thead>
@@ -31,7 +30,6 @@
                 <tr th:each="squadra : ${squadre}">
                     <td th:text="${squadra.nome}">Nome</td>
                     <td th:text="${squadra.annoFondazione}">Anno di Fondazione</td>
-                    <td></td>
                     <td>
                         <a th:href="@{/squadra/{id}(id=${squadra.id})}">Dettagli</a>
                         <a th:href="@{/admin/formUpdateSquadra/{id}(id=${squadra.id})}">Modifica</a>

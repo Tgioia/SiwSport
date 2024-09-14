@@ -18,6 +18,13 @@
     </header>
 
     <main>
+
+		<section>
+		    <h2>Gestione Presidenti</h2>
+		    <!-- Link per aggiungere un nuovo presidente -->
+		    <a th:href="@{/admin/formNewPresidente}" class="button">Crea Nuovo Presidente</a>
+		</section>
+		
         <section>
             <h2>Gestione Squadre</h2>
             <ul>
@@ -29,7 +36,6 @@
         <section>
             <h2>Gestione Giocatori</h2>
             <ul>
-                <li><a th:href="@{/admin/formNewGiocatore}">Aggiungi Nuovo Giocatore</a></li>
                 <li><a th:href="@{/admin/indexGiocatori}">Visualizza e Gestisci Giocatori</a></li>
             </ul>
         </section>

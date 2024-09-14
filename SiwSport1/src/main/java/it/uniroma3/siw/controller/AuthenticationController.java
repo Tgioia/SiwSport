@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.model.Credentials;
+import it.uniroma3.siw.model.Presidente;
 import it.uniroma3.siw.model.User;
+import it.uniroma3.siw.repository.CredentialsRepository;
 import it.uniroma3.siw.service.CredentialsService;
+import it.uniroma3.siw.service.PresidenteService;
 import it.uniroma3.siw.service.UserService;
 import jakarta.validation.Valid;
 
@@ -23,7 +26,12 @@ public class AuthenticationController {
 	
 	@Autowired
 	private CredentialsService credentialsService;
+	@Autowired
+	private CredentialsRepository credentialsRepository;
 
+	@Autowired
+	private PresidenteService presidenteService;
+	
     @Autowired
 	private UserService userService;
 	
@@ -50,7 +58,7 @@ public class AuthenticationController {
 			Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
 			if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
 				return "admin/indexAdmin.html";
-			}
+			} else if(credentials.getRole().equals(credentials.PRES_ROLE)) return "presidente/indexPresidente";
 		}
         return "index.html";
 	}
@@ -62,7 +70,7 @@ public class AuthenticationController {
     	Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
             return "admin/indexAdmin";
-        }
+        } else if(credentials.getRole().equals(credentials.PRES_ROLE)) return "presidente/indexPresidente";
         return "index";
     }
 
@@ -83,4 +91,38 @@ public class AuthenticationController {
         }
         return "registerUser";
     }
+	// Gestisce la visualizzazione del form per registrare un presidente (solo Admin)
+	@GetMapping(value = "/admin/formNewPresidente") 
+	public String showRegisterPresidenteForm(Model model) {
+		Presidente pres = new Presidente();
+		
+		Credentials cred = new Credentials();
+		cred.setRole(Credentials.PRES_ROLE);
+		pres.setCredentials(cred);
+		model.addAttribute("presidente", pres);
+		model.addAttribute("credentials", cred);
+		System.out.println("Ruolo prima del salvataggio: " + cred.getRole());
+		System.out.println("Ruolo prima del salvataggio: " + pres.getCredentials().getRole());
+
+		return "admin/formNewPresidente"; // Il form per registrare un presidente
+	}
+	
+	@PostMapping(value = { "/admin/registerPresidente" })
+	public String registerPresidente(@Valid @ModelAttribute("presidente") Presidente presidente,
+	                                 BindingResult presidenteBindingResult,
+	                                 Model model) {
+
+	    if (!presidenteBindingResult.hasErrors()) {
+	        Credentials cred = presidente.getCredentials();
+	        
+	        System.out.println("Ruolo cred: " + cred.getRole());
+	        cred.setPresidente(presidente);
+	        credentialsService.saveCredentials(cred);
+	        presidenteService.savePresidente(presidente);
+
+	        return "admin/indexAdmin";
+	    }
+	    return "admin/formNewPresidente";
+    }
+
 }

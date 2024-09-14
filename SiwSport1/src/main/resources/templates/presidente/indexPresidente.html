@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Presidente</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <a href="/"><img src="/images/logo.png" alt="Federazione Sportiva Logo" class="logo"></a>
+        <h1>Dashboard Presidente</h1>
+        <nav>
+            <ul>
+               
+                <li th:if="${#authentication.name != 'anonymousUser'}">
+                    <a th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Gestione Giocatori</h2>
+
+            <a th:href="@{/presidente/formNewGiocatore}" class="button">Aggiungi Giocatore alla Squadra</a>
+
+            <a th:href="@{/giocatori}" class="button">Visualizza Giocatori</a>
+        </section>
+
+        <section>
+            <h2>Visualizza Squadre</h2>
+
+            <a th:href="@{/squadre}" class="button">Visualizza Squadre</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Federazione Sportiva</p>
+    </footer>
+</body>
+</html>
