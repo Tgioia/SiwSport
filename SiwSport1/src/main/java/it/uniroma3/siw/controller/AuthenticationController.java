@@ -91,7 +91,6 @@ public class AuthenticationController {
         }
         return "registerUser";
     }
-	// Gestisce la visualizzazione del form per registrare un presidente (solo Admin)
 	@GetMapping(value = "/admin/formNewPresidente") 
 	public String showRegisterPresidenteForm(Model model) {
 		Presidente pres = new Presidente();
@@ -101,10 +100,7 @@ public class AuthenticationController {
 		pres.setCredentials(cred);
 		model.addAttribute("presidente", pres);
 		model.addAttribute("credentials", cred);
-		System.out.println("Ruolo prima del salvataggio: " + cred.getRole());
-		System.out.println("Ruolo prima del salvataggio: " + pres.getCredentials().getRole());
-
-		return "admin/formNewPresidente"; // Il form per registrare un presidente
+		return "admin/formNewPresidente";
 	}
 	
 	@PostMapping(value = { "/admin/registerPresidente" })
