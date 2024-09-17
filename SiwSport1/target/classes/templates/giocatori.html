@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Elenco Giocatori</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+</head>
+
+<body>
+    <header>
+        <a href="/"><img src="/images/logo.png" alt="Federazione Sportiva Logo" class="logo"></a>
+        <h1>Federazione Sportiva</h1>
+        <nav>
+            <ul>
+                <li th:if="${#authentication.name != 'anonymousUser'}">
+                    <a th:href="@{/logout}">Logout</a>
+                </li>
+                <li th:unless="${#authentication.name != 'anonymousUser'}">
+                    <a th:href="@{/login}">Login</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <h2>Elenco Giocatori</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Ruolo</th>
+				<th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="giocatore : ${giocatori}">
+                <td th:text="${giocatore.nome}">Nome</td>
+                <td th:text="${giocatore.cognome}">Cognome</td>
+                <td th:text="${giocatore.ruolo}">Ruolo</td>
+                <td>
+                    <a th:href="@{'/giocatore' + '/' +${giocatore.id}}">Dettagli</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

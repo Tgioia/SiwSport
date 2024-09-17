@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dettagli Squadra</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+</head>
+
+<body>
+    <header>
+        <a href="/"><img src="/images/logo.png" alt="Federazione Sportiva Logo" class="logo"></a>
+        <h1>Federazione Sportiva</h1>
+        <nav>
+            <ul>
+                <li th:if="${#authentication.name != 'anonymousUser'}">
+                    <a th:href="@{/logout}">Logout</a>
+                </li>
+                <li th:unless="${#authentication.name != 'anonymousUser'}">
+                    <a th:href="@{/login}">Login</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <h2>Dettagli della Squadra</h2>
+    <p><strong>Nome:</strong> <span th:text="${squadra.nome}"></span></p>
+    <p><strong>Anno di Fondazione:</strong> <span th:text="${squadra.annoFondazione}"></span></p>
+    <p><strong>Indirizzo:</strong> <span th:text="${squadra.indirizzoSede}"></span></p>
+    <p><strong>Presidente:</strong> <span th:text="${squadra.presidente.nome + ' ' + squadra.presidente.cognome}"></span></p>
+
+	<h3>Giocatori</h3>
+	   <ul>
+	       <li th:each="giocatore : ${squadra.giocatori}">
+	           <!-- Add link to each player -->
+	           <a th:href="@{'/giocatore/' + ${giocatore.id}}">
+	               <span th:text="${giocatore.nome + ' ' + giocatore.cognome}"></span>
+	           </a> - <span th:text="${giocatore.ruolo}"></span>
+	       </li>
+	   </ul>
+
+    <a th:href="@{/squadre}">Torna all'elenco</a>
+</body>
+
+</html>

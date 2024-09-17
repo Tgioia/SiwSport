@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrazione Presidente</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <a href="/"><img src="/images/logo.png" alt="Federazione Sportiva Logo" class="logo"></a>
+        <h1>Registrazione Presidente</h1>
+    </header>
+
+    <form th:action="@{/admin/registerPresidente}" th:object="${presidente}" method="post">
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" th:field="*{nome}" required />
+        </div>
+
+        <div>
+            <label for="cognome">Cognome:</label>
+            <input type="text" th:field="*{cognome}" required />
+        </div>
+
+        <div>
+            <label for="codiceFiscale">Codice Fiscale:</label>
+            <input type="text" th:field="*{codiceFiscale}" required />
+        </div>
+
+        <div>
+            <label for="dataNascita">Data di Nascita:</label>
+            <input type="date" th:field="*{dataNascita}" required />
+        </div>
+
+        <div>
+            <label for="luogoNascita">Luogo di Nascita:</label>
+            <input type="text" th:field="*{luogoNascita}" required />
+        </div>
+
+        <h2>Credenziali di Accesso</h2>
+		
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" th:field="*{credentials.username}" required />
+        </div>
+
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" th:field="*{credentials.password}" required />
+			
+			<input type="hidden" th:field="*{credentials.role}" value="PRESIDENTE" />
+        </div>
+
+        <button type="submit">Registra Presidente</button>
+    </form>
+</body>
+</html>
